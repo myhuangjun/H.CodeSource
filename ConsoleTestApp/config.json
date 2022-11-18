@@ -1,0 +1,22 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  //Teambition应用配置
+  "AppId": "63671400775dac402a09e569",
+  "Secret": "9snMu4WV7AhDzoQSt6ZYv7rX6rEXiWD8",
+  //Redis连接字符串
+  "RedisStr": "192.168.1.121:6379,password=y13zowee",
+  //企业微信信息
+  "Wechat_Corp_Id": "ww19fa5c63d52ff685", //企业id
+  "Wechat_AgentId": "1000016",
+  "Wechat_Secret": "12sJJY4Ra5ktYthzKuSrYcBNn96CpbG2NM89xVvcJ6w",
+  "Robots": {
+    "TestRobot": "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=87d8c3cf-4649-44c2-adc3-f8c14100c431"
+
+  }
+}
