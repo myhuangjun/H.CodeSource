@@ -15,4 +15,13 @@
 //    Console.WriteLine(service.Get_Access_TokenAsync());
 //}
 //Console.Read();
+using HConfiguration;
+using Microsoft.Extensions.Configuration;
+
 Console.WriteLine("Hello, World!");
+
+var configurationBuilder = new ConfigurationBuilder();
+//configurationBuilder.AddJsonFile("app.json",false,true);
+//configurationBuilder.Add(new HConfigurationSource() { Path = "app.json",ReloadOnChange=true });
+IConfigurationRoot root = configurationBuilder.Build();
+Console.WriteLine(root["name"] + "::"+root["age"]); 

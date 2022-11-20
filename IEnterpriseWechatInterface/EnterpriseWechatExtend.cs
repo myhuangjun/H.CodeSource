@@ -1,4 +1,4 @@
-﻿using H.EnterpriseWechatInterface;
+﻿using HEnterpriseWechatInterface;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;

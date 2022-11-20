@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 
-namespace H.EnterpriseWechatInterface
+namespace HEnterpriseWechatInterface
 {
     /// <summary>
     /// 企业微信接口

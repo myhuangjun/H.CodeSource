@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Logger\H.Logger.csproj" />
+    <ProjectReference Include="..\Logger\HLoggers.csproj" />
   </ItemGroup>
 
 </Project>
