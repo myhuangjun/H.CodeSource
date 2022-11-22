@@ -1,4 +1,4 @@
-﻿using H.Logger;
+﻿using HLoggers;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace H.EnterpriseWechatInterface
+namespace HEnterpriseWechatInterface
 {
     /// <summary>
     /// 企业微信实现类
@@ -46,7 +46,7 @@ namespace H.EnterpriseWechatInterface
             }
             catch (Exception e)
             {
-                H.Logger.Logger.Default.Error("GetAccess_Token报错啦,错误原因:" + e.Message);
+                Logger.Default.Error("GetAccess_Token报错啦,错误原因:" + e.Message);
                 throw;
             }
         }
@@ -80,7 +80,7 @@ namespace H.EnterpriseWechatInterface
             }
             catch (Exception e)
             {
-                H.Logger.Logger.Default.Error("SendMessage报错啦,错误原因:" + e.Message);
+                Logger.Default.Error("SendMessage报错啦,错误原因:" + e.Message);
                 throw;
             }
         }
@@ -111,7 +111,7 @@ namespace H.EnterpriseWechatInterface
             }
             catch (Exception e)
             {
-                H.Logger.Logger.Default.Error("SendRobotMessage报错了,错误原因:" + e.Message);
+                Logger.Default.Error("SendRobotMessage报错了,错误原因:" + e.Message);
                 throw;
             }
             
