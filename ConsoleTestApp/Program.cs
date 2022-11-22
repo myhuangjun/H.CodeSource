@@ -1,5 +1,7 @@
 ﻿//// See https://aka.ms/new-console-template for more information
 
+#region 日志
+/*
 using ConsoleTestApp;
 using H.EnterpriseWechatInterface;
 using H.Logger;
@@ -9,8 +11,6 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
-
-//Console.WriteLine("Hello, World!");
 IServiceCollection services = new ServiceCollection();
 services.AddLogging(logBuilder =>
 {
@@ -19,6 +19,9 @@ services.AddLogging(logBuilder =>
     logBuilder.SetMinimumLevel(LogLevel.Trace);
 });
 services.AddScoped<TestService>();
+
+//Console.WriteLine("Hello, World!");
+
 
 //services.AddScoped<Logger>();
 //services.AddEnterpriseWechat();
@@ -30,5 +33,9 @@ using (var sp = services.BuildServiceProvider())
     test.Test();
 }
 //Console.Read();
+*/
+#endregion
+using HExpression;
 
-//Console.WriteLine("Hello, World!");
+var ex = new HExpressionExtension();
+Console.WriteLine(ex.GetExpressionString()); 

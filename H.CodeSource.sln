@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTestApp", "ConsoleTestApp\ConsoleTestApp.csproj", "{0A585E2E-A82F-4AAC-83B8-4E13A588C449}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleTestApp", "ConsoleTestApp\ConsoleTestApp.csproj", "{0A585E2E-A82F-4AAC-83B8-4E13A588C449}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "H.EnterpriseWechatInterface", "IEnterpriseWechatInterface\H.EnterpriseWechatInterface.csproj", "{E551CA27-237A-4F76-A074-03096366026B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "H.EnterpriseWechatInterface", "IEnterpriseWechatInterface\H.EnterpriseWechatInterface.csproj", "{E551CA27-237A-4F76-A074-03096366026B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "H.Logger", "Logger\H.Logger.csproj", "{47DB71AA-8513-4DC3-AD39-70441D70FC92}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "H.Logger", "Logger\H.Logger.csproj", "{47DB71AA-8513-4DC3-AD39-70441D70FC92}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HExpression", "HExpression\HExpression.csproj", "{596FF0CC-8D8A-4C4B-BB7C-BD5BE6E67C11}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{47DB71AA-8513-4DC3-AD39-70441D70FC92}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47DB71AA-8513-4DC3-AD39-70441D70FC92}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47DB71AA-8513-4DC3-AD39-70441D70FC92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{596FF0CC-8D8A-4C4B-BB7C-BD5BE6E67C11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{596FF0CC-8D8A-4C4B-BB7C-BD5BE6E67C11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{596FF0CC-8D8A-4C4B-BB7C-BD5BE6E67C11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{596FF0CC-8D8A-4C4B-BB7C-BD5BE6E67C11}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
