@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "WebApi\WebApi.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleTestApp", "ConsoleTestApp\ConsoleTestApp.csproj", "{D90BA6CE-C2D3-4601-8F98-E3227EA03F1F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiddleWare", "MiddleWare\MiddleWare.csproj", "{8388C0DB-E05D-4156-95EB-70ACBDFDFAEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiddleWare", "MiddleWare\MiddleWare.csproj", "{8388C0DB-E05D-4156-95EB-70ACBDFDFAEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JWT", "JWT\JWT.csproj", "{E7ADE448-5DBA-4EE6-9653-F06237993AE5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{8388C0DB-E05D-4156-95EB-70ACBDFDFAEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8388C0DB-E05D-4156-95EB-70ACBDFDFAEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8388C0DB-E05D-4156-95EB-70ACBDFDFAEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7ADE448-5DBA-4EE6-9653-F06237993AE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7ADE448-5DBA-4EE6-9653-F06237993AE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7ADE448-5DBA-4EE6-9653-F06237993AE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7ADE448-5DBA-4EE6-9653-F06237993AE5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
