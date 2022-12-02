@@ -1,5 +1,7 @@
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 using WebApi;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +12,15 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+//×¢²áÍÐ¹Ü·þÎñ
+builder.Services.AddHostedService<HHostedService>();
+builder.Services.AddScoped<TestService>();
+
+builder.Services.AddFluentValidation(opt =>
+{
+    opt.RegisterValidatorsFromAssembly(Assembly.GetEntryAssembly());
+});
+
 builder.Services.Configure<MvcOptions>(opt =>
 {
     opt.Filters.Add<HExceptionFilter>();

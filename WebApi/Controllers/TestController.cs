@@ -19,5 +19,11 @@ namespace WebApi.Controllers
             Console.WriteLine("我是正常执行");
             return Task.CompletedTask;
         }
+        [HttpPost]
+        public Task Test3(Student student)
+        {
+            Console.WriteLine("OK");
+            return Task.CompletedTask;
+        }
     }
 }
