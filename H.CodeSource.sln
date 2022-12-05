@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleTestApp", "ConsoleTe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiddleWare", "MiddleWare\MiddleWare.csproj", "{8388C0DB-E05D-4156-95EB-70ACBDFDFAEF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JWT", "JWT\JWT.csproj", "{E7ADE448-5DBA-4EE6-9653-F06237993AE5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JWT", "JWT\JWT.csproj", "{E7ADE448-5DBA-4EE6-9653-F06237993AE5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HSignalR", "HSignalR\HSignalR.csproj", "{0BDA3CBD-49B5-463C-AA30-09C2F46DA603}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{E7ADE448-5DBA-4EE6-9653-F06237993AE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7ADE448-5DBA-4EE6-9653-F06237993AE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7ADE448-5DBA-4EE6-9653-F06237993AE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BDA3CBD-49B5-463C-AA30-09C2F46DA603}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BDA3CBD-49B5-463C-AA30-09C2F46DA603}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BDA3CBD-49B5-463C-AA30-09C2F46DA603}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BDA3CBD-49B5-463C-AA30-09C2F46DA603}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
