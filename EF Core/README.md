@@ -77,7 +77,65 @@ await context.SaveChangesAsync();
 1. `Update-Database migrationName` 回滚到某个migration的状态
 2. `Remove-migration`  删除最后一次迁移
 3. `Script-Migration D F`  生成D到F版本的Sql语句,但不执行
+
+#### 五.查看Sql语句
+
+1. 标准日志
+
+   ```C#
+   private readonly ILoggerFactory loggerFactory = LoggerFactory.Create(c => c.AddConsole());
+   
+   protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+   {
+   	string conn = "******";
+   	optionsBuilder.UseSqlServer(conn);
+   	optionsBuilder.UseLoggerFactory(loggerFactory);  //配置日志系统
+   	base.OnConfiguring(optionsBuilder);
+   }
+   ```
+
+2. 简单日志
+
+   ```c#
+   optionsBuilder.LogTo(Console.WriteLine);//简单日志
+   ```
+
+3. `IQueryable`的`ToQueryString`方法
+
+   ```C#
+   var list = context.Books.Where(x => x.Id == 1);
+   Console.WriteLine(list.ToQueryString()); 
+   ```
+
+#### 六.使用Mysql数据库
+
+1. `EF Provider`选择:`MySQL.EntityFrameworkCore --MySql官方`,`Pomelo.EntityFrameworkCore.MySql   --开源开发者`
+
+2. EF原理:`EF Core`->数据库Provider->`Ado.Net Core`->数据库
+
+#### 七.导航属性
+
+1. 一对多关系设置
+  `评论端设置:builder.HasOne<Article>(x => x.Article).WithMany(a=>a.Comments).IsRequired();`
+
+2. 获取一对多的关系:**Include**
+  `var a1 = ctx.Articles.Include(x => x.Comments).Single(x => x.Id == 1);`
+
+3. 一对多的关系:`WithMany`不带参数即可
+
+  ```C#
+   //单向导航  显示指定外键并加上.OnDelete(DeleteBehavior.Restrict)
+  builder.HasOne<User>(x =>x.AuditUser).WithMany().
+  HasForeignKey(x=>x.AuditUserId).OnDelete(DeleteBehavior.Restrict);
+  ```
+
 4. 
+
+5. 
+
+
+
+   
 
 
 
@@ -87,5 +145,5 @@ await context.SaveChangesAsync();
 
 1. 微软官方文档:https://learn.microsoft.com/zh-cn/aspnet/core/data/ef-mvc/intro?source=recommendations&view=aspnetcore-6.0
 
-2. Guid设置主键时不能用聚集索引,在MySQL中,插入频繁的表不要用Guid做主键
+2. `Guid`设置主键时不能用聚集索引,在`MySQL`中,插入频繁的表不要用`Guid`做主键
 

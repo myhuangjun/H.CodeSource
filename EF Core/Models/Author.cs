@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EF_Core
+namespace EF_Core.Models
 {
     public class Author
     {

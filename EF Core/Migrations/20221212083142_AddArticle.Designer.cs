@@ -4,6 +4,7 @@ using EF_Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EF_Core.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221212083142_AddArticle")]
+    partial class AddArticle
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,7 +24,7 @@ namespace EF_Core.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("EF_Core.Models.Article", b =>
+            modelBuilder.Entity("EF_Core.Article", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -43,7 +45,7 @@ namespace EF_Core.Migrations
                     b.ToTable("Articles");
                 });
 
-            modelBuilder.Entity("EF_Core.Models.Author", b =>
+            modelBuilder.Entity("EF_Core.Author", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -64,7 +66,7 @@ namespace EF_Core.Migrations
                     b.ToTable("Authors");
                 });
 
-            modelBuilder.Entity("EF_Core.Models.Book", b =>
+            modelBuilder.Entity("EF_Core.Book", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -91,7 +93,7 @@ namespace EF_Core.Migrations
                     b.ToTable("Books", (string)null);
                 });
 
-            modelBuilder.Entity("EF_Core.Models.Comment", b =>
+            modelBuilder.Entity("EF_Core.Comment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -113,53 +115,9 @@ namespace EF_Core.Migrations
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("EF_Core.Models.Leave", b =>
+            modelBuilder.Entity("EF_Core.Comment", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("AuditUserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OperUserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AuditUserId");
-
-                    b.HasIndex("OperUserId");
-
-                    b.ToTable("Leave");
-                });
-
-            modelBuilder.Entity("EF_Core.Models.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Age")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("EF_Core.Models.Comment", b =>
-                {
-                    b.HasOne("EF_Core.Models.Article", "Article")
+                    b.HasOne("EF_Core.Article", "Article")
                         .WithMany("Comments")
                         .HasForeignKey("ArticleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -168,26 +126,7 @@ namespace EF_Core.Migrations
                     b.Navigation("Article");
                 });
 
-            modelBuilder.Entity("EF_Core.Models.Leave", b =>
-                {
-                    b.HasOne("EF_Core.Models.User", "AuditUser")
-                        .WithMany()
-                        .HasForeignKey("AuditUserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("EF_Core.Models.User", "OperUser")
-                        .WithMany()
-                        .HasForeignKey("OperUserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("AuditUser");
-
-                    b.Navigation("OperUser");
-                });
-
-            modelBuilder.Entity("EF_Core.Models.Article", b =>
+            modelBuilder.Entity("EF_Core.Article", b =>
                 {
                     b.Navigation("Comments");
                 });

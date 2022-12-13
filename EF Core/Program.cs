@@ -1,5 +1,6 @@
-﻿// See https://aka.ms/new-console-template for more information
+// See https://aka.ms/new-console-template for more information
 using EF_Core;
+using Microsoft.EntityFrameworkCore;
 
 Console.WriteLine("Hello, World!");
 
@@ -14,8 +15,9 @@ Console.WriteLine("Hello, World!");
 //context.Books.Add(book);
 //var result = await context.SaveChangesAsync();//保存
 //Console.WriteLine("成功执行条数:" + result);
-////查询数据
+//查询数据
 //var list = context.Books.Where(x => x.Id == 1);
+//Console.WriteLine(list.ToQueryString()); 
 //foreach (var item in list)
 //{
 //    Console.WriteLine(item.Price);
@@ -31,3 +33,16 @@ Console.WriteLine("Hello, World!");
 //await context.SaveChangesAsync();
 #endregion
 
+#region 多对多的新增
+using var ctx = new MyDbContext();
+//var article = new Article() { Content = "今天疫情放开了", Title = "2022-12-9" };
+//var c1 = new Comment() { Message = "没想到是这种方式结束" };
+//var c2 = new Comment() { Message = "我们是不是更危险了" };
+//article.Comments.Add(c1);
+//article.Comments.Add(c2);
+//ctx.Articles.Add(article);
+//await ctx.SaveChangesAsync();
+var a1 = ctx.Articles.Include(x => x.Comments).Single(x => x.Id == 1);
+Console.WriteLine(a1.Title);
+a1.Comments.ForEach(x => Console.WriteLine(x.Message));
+#endregion
