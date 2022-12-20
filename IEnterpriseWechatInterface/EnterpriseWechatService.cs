@@ -1,5 +1,7 @@
 ﻿using HLoggers;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -15,10 +17,14 @@ namespace HEnterpriseWechatInterface
     /// </summary>
     public class EnterpriseWechatService : IEnterpriseWechatInterface
     {
-        private readonly IConfiguration _configuration;
-        public EnterpriseWechatService(IConfiguration configuration)
+        private readonly string _cropId;
+        private readonly string _corpsecret;
+        private readonly string _agent;
+        public EnterpriseWechatService(IOptionsSnapshot<WechatSetting> options)
         {
-            _configuration = configuration;
+            _cropId = options.Value.Wechat_Corp_Id;
+            _corpsecret = options.Value.Wechat_Secret;
+            _agent = options.Value.Wechat_AgentId;
         }
 
         /// <summary>
@@ -30,9 +36,7 @@ namespace HEnterpriseWechatInterface
         {
             try
             {
-                var corpid = _configuration["Wechat_Corp_Id"];
-                var corpsecret = _configuration["Wechat_Secret"];
-                var url = $"https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid={corpid}&corpsecret={corpsecret}";
+                var url = $"https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid={_cropId}&corpsecret={_corpsecret}";
                 using (HttpClient client = new HttpClient())
                 {
                     var response = client.GetAsync(url).Result;
@@ -65,7 +69,7 @@ namespace HEnterpriseWechatInterface
                 var model = new JObject();
                 model["touser"] = touser;
                 model["msgtype"] = "text";
-                model["agentid"] = _configuration["Wechat_AgentId"]?.ToString();
+                model["agentid"] =_agent;
                 model["text"] = new JObject() { ["content"] = message };
                 var url = $" https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token={access_token}";
                 using (HttpClient client = new HttpClient())
@@ -93,11 +97,10 @@ namespace HEnterpriseWechatInterface
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
 
-        public async Task<JObject> SendRobotMessageAsync(string robotName, string message, string userList = "\"@all\"")
+        public async Task<JObject> SendRobotMessageAsync(string url, string message, string userList = "\"@all\"")
         {
             try
             {
-                var url = _configuration.GetSection("Robots").GetSection(robotName).Value;
                 var requestBody = "{\"msgtype\":\"text\",\"text\":{\"content\":\"" + message + "\",\"mentioned_mobile_list\":[" + userList + "]}}";
                 using (var client = new HttpClient())
                 {

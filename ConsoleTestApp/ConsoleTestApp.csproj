@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\IEnterpriseWechatInterface\HEnterpriseWechatInterface.csproj" />
     <ProjectReference Include="..\Logger\H.Logger.csproj" />
   </ItemGroup>
 

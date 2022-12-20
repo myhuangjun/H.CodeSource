@@ -27,7 +27,7 @@ namespace EF_Core
         /// <param name="optionsBuilder"></param>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            string conn = "*********************************************";
+            string conn = "Data Source=192.168.1.20;Database=ManagerSystem;UID=sa;PWD=mrj_5678987;MultipleActiveResultSets=true";
             optionsBuilder.UseSqlServer(conn);
             //optionsBuilder.UseLoggerFactory(loggerFactory);  //配置日志系统
             //optionsBuilder.LogTo(Console.WriteLine);//简单日志

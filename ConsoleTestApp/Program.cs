@@ -6,12 +6,13 @@
 //using H.EnterpriseWechatInterface;
 //using H.Logger;
 //using Microsoft.Extensions.Configuration;
-//using Microsoft.Extensions.DependencyInjection;
+using HEnterpriseWechatInterface;
+using Microsoft.Extensions.DependencyInjection;
 //using Microsoft.Extensions.DependencyInjection.Extensions;
 //using Microsoft.Extensions.Logging;
 //using NLog.Extensions.Logging;
 //using Microsoft.Extensions.Logging.Console;
-//IServiceCollection services = new ServiceCollection();
+IServiceCollection services = new ServiceCollection();
 //services.AddLogging(logBuilder =>
 //{
 //    logBuilder.AddConsole();
@@ -23,16 +24,19 @@
 ////Console.WriteLine("Hello, World!");
 
 
-////services.AddScoped<Logger>();
-////services.AddEnterpriseWechat();
-//using (var sp = services.BuildServiceProvider())
-//{
-//    //var service = sp.GetService<IEnterpriseWechatInterface>();
-//    //Console.WriteLine(service.Get_Access_TokenAsync());
-//    var test = sp.GetRequiredService<TestService>();
-//    test.Test();
-//}
-////Console.Read();
+//services.AddScoped<Logger>();
+//services.AddEnterpriseWechat();
+services.AddEnterpriseWechat(set => {
+    set.Wechat_Secret = "****Secret";
+    set.Wechat_Corp_Id = "*****Corp_Id*******";
+    set.Wechat_AgentId = "********AgentId********";
+});
+using (var sp = services.BuildServiceProvider())
+{
+    var service = sp.GetRequiredService<IEnterpriseWechatInterface>();
+    Console.WriteLine(service.Get_Access_TokenAsync());
+}
+//Console.Read();
 //*/
 //#endregion
 ////using HExpression;
