@@ -116,10 +116,10 @@ await context.SaveChangesAsync();
 #### 七.导航属性
 
 1. 一对多关系设置
-  `评论端设置:builder.HasOne<Article>(x => x.Article).WithMany(a=>a.Comments).IsRequired();`
+    `评论端设置:builder.HasOne<Article>(x => x.Article).WithMany(a=>a.Comments).IsRequired();`
 
 2. 获取一对多的关系:**Include**
-  `var a1 = ctx.Articles.Include(x => x.Comments).Single(x => x.Id == 1);`
+    `var a1 = ctx.Articles.Include(x => x.Comments).Single(x => x.Id == 1);`
 
 3. 一对多的关系:`WithMany`不带参数即可
 
@@ -129,13 +129,50 @@ await context.SaveChangesAsync();
   HasForeignKey(x=>x.AuditUserId).OnDelete(DeleteBehavior.Restrict);
   ```
 
-4. 
+#### 八.`IQueryable`的延迟查询
 
-5. 
+1. `IQueryable`终结方法才会查出数据:终结方法:`遍历,ToArray().ToList(),Min().Max(),Count()等`;非终结方法:`GroupBy(),OrderBy(),Include(),Skip(),Take()等(一般返回IQueryable)`
 
+2. 可以利用延迟查询实现动态查询
 
+3. 默认使用的是`DataReader`方式,一直连接数据库读取;可以使用`ToList()等`方法把全部数据读取到内存
 
-   
+4. 异步方法.大部分是定义在`Microsoft.EntityFrameworkCore`命名空间下,终端方法才有异步方法
+
+5. 异步遍历`IQueryable`
+
+   ```C#
+   await foreach(var item in ctx.Article.AsAsyncEnumable())
+   {
+       Console.WriteLine(item.Title);
+   }
+   ```
+
+#### 九.执行原生SQL语句
+
+1. 执行查询方法:`ctx.Database.ExcuteSqkInterpolatedAsync()`,参数用`FormattableString`可以避免SQL注入
+
+2. 实体对应sql查询:`IQueryable<Book> books=ctx.Book.FromSqlInterpolated()`
+
+3. 你用ADO.NET执行复杂SQL
+
+   ```C#
+   var conn = ctx.Database.GetDbConnection();
+   if (conn.State != System.Data.ConnectionState.Open) conn.Open();
+   using var cmd = conn.CreateCommand();
+   cmd.CommandText = "select * from  Articles";
+   cmd.CommandType = System.Data.CommandType.Text;
+   using var reader = await cmd.ExecuteReaderAsync();
+   while (await reader.ReadAsync())
+   {
+       Console.WriteLine($"{reader[0]}--{reader[1]}--{reader[2]}");
+   }
+   ```
+4. 推荐使用Dapper等框架执行原生复杂查询SQL
+#### 十.实体跟踪
+1. 调用`ctx.Entry(a1);`查看实体在EF的跟踪信息,`DebugView.LongView`可以查看快照信息
+1. 如果查询的数据不做修改,可以使用`AsNoTracking()`降低内存占用
+1. 
 
 
 

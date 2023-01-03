@@ -42,7 +42,17 @@ using var ctx = new MyDbContext();
 //article.Comments.Add(c2);
 //ctx.Articles.Add(article);
 //await ctx.SaveChangesAsync();
-var a1 = ctx.Articles.Include(x => x.Comments).Single(x => x.Id == 1);
-Console.WriteLine(a1.Title);
-a1.Comments.ForEach(x => Console.WriteLine(x.Message));
+//var a1 = ctx.Articles.Include(x => x.Comments).Single(x => x.Id == 1);
+//Console.WriteLine(a1.Title);
+//a1.Comments.ForEach(x => Console.WriteLine(x.Message));
+var conn = ctx.Database.GetDbConnection();
+if (conn.State != System.Data.ConnectionState.Open) conn.Open();
+using var cmd = conn.CreateCommand();
+cmd.CommandText = "select * from  Articles";
+cmd.CommandType = System.Data.CommandType.Text;
+using var reader = await cmd.ExecuteReaderAsync();
+while (await reader.ReadAsync())
+{
+    Console.WriteLine($"{reader[0]}--{reader[1]}--{reader[2]}");
+}
 #endregion
