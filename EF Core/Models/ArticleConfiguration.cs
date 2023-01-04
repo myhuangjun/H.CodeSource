@@ -12,8 +12,12 @@ namespace EF_Core.Models
     {
         public void Configure(EntityTypeBuilder<Article> builder)
         {
-            //在Article端配置
-            //builder.HasMany<Comment>().WithOne(x => x.Article);
+
+            //builder.HasMany<Comment>().WithOne(x => x.Article);//在Article端配置导航属性
+            //builder.HasQueryFilter(x => !x.IsDelete); //设置全局筛选器
+            //builder.Property("IsDelete").IsConcurrencyToken();//设置并发令牌
+            builder.Property("RowVersion").IsRowVersion();
+
         }
     }
 

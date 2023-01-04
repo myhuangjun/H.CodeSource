@@ -171,8 +171,96 @@ await context.SaveChangesAsync();
 4. 推荐使用Dapper等框架执行原生复杂查询SQL
 #### 十.实体跟踪
 1. 调用`ctx.Entry(a1);`查看实体在EF的跟踪信息,`DebugView.LongView`可以查看快照信息
+
 1. 如果查询的数据不做修改,可以使用`AsNoTracking()`降低内存占用
-1. 
+
+#### 十一.全局查询
+
+1. 在实体配置类中添加配置
+
+   ```C#
+   public class ArticleConfiguration : IEntityTypeConfiguration<Article>
+   {
+       public void Configure(EntityTypeBuilder<Article> builder)
+       {
+           builder.HasQueryFilter(x => !x.IsDelete); //设置全局筛选器
+       }
+   }
+   ```
+
+2. 某个查询忽略全局筛选
+
+   ```C#
+   var list2 = ctx.Articles.*IgnoreQueryFilters().Where(x => x.IsDelete).ToList();
+   ```
+
+#### 十二.并发控制
+
+1. `MySQL`行悲观锁控制[不推荐]
+
+   ```C#
+   using var ctx=new MyDbContext();
+   using var tx=ctx.Database.BeginTransaction();
+   var h=ctx.House.FromSqlInterpolated($"select * from House where Id=1 for update").Single(); //添加悲观锁
+   if(!string.IsNullOrEmpty(h.Owner)
+   {
+       ......
+   }
+   h.owner="xxxxxx";
+   ctx.SaveChanges();
+   tx.commit();
+   ```
+
+2. 乐观并发控制
+
+   1. 原理:**更新时在where后加上读出来的值[并发令牌]**
+
+   ```sql
+   Update House Set Owner=新值 where Id=1 and Owner=旧值
+   ```
+
+   2. 具体实现
+
+   ```C#
+   1.实体配置类中设置并发令牌
+     public void Configure(EntityTypeBuilder<Article> builder)
+   {
+        builder.Property("IsDelete").IsConcurrencyToken();//设置并发令牌
+   }
+   
+   2.使用乐观锁
+   var article=ctx.Articles.First();
+   article.IsDelete = !article.IsDelete;
+   Thread.Sleep(5000);
+   try
+   {
+   	ctx.SaveChanges();
+   }
+   catch (DbUpdateConcurrencyException e)
+   {
+   	var entry = e.Entries.First();
+   	Console.WriteLine("并发访问冲突,新值为:" + entry.GetDatabaseValues().GetValue<string>("Owner"));
+   	Console.ReadLine();
+   	return;
+   }
+   Console.WriteLine("设置成功");
+   Console.ReadLine();
+   ```
+
+   3. `SQL Server`可以使用`ROWVERSION`,类型为byte[]类型的并发令牌,其他数据库可以使用`RowVersion=Guid.NewGuid()`
+   
+      ```C#
+      public void Configure(EntityTypeBuilder<Article> builder)
+      {
+      	builder.Property("RowVersion").IsRowVersion();//设置RowVersion
+      }
+      ```
+   
+      
+
+
+
+
 
 
 
@@ -183,4 +271,6 @@ await context.SaveChangesAsync();
 1. 微软官方文档:https://learn.microsoft.com/zh-cn/aspnet/core/data/ef-mvc/intro?source=recommendations&view=aspnetcore-6.0
 
 2. `Guid`设置主键时不能用聚集索引,在`MySQL`中,插入频繁的表不要用`Guid`做主键
+
+3. `Zack.EFCore.Batch`包实现EF批量操作
 

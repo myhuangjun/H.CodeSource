@@ -14,6 +14,8 @@ namespace EF_Core.Models
         public int Id { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
+        public byte[] RowVersion { get; set; }
+        public bool IsDelete { get; set; }
         public List<Comment> Comments { get; set; } = new List<Comment>();
     }
 
