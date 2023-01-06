@@ -3,13 +3,11 @@
 #region 通用命名空间
 using ConsoleTestApp;
 using Microsoft.Extensions.Configuration;
-using HEnterpriseWechatInterface;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
-using HRedis;
 using System.Net.Http.Headers;
 
 IServiceCollection services = new ServiceCollection();
